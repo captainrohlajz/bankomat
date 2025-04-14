@@ -1,0 +1,75 @@
+{
+    "identification": {
+        "all_expected_columns": [
+            "Adresa protistrany",
+            "Datum zaúčtování",
+            "Debet",
+            "Kredit",
+            "Kód banky protistrany",
+            "Měna",
+            "Název účtu protistrany",
+            "Předčíslí účtu protistrany",
+            "Reference",
+            "SWIFT (BIC)",
+            "Typ transakce",
+            "Valuta",
+            "Účel",
+            "Účet protistrany"
+        ]
+    },
+    "column_mapping": {
+        "Typ transakce": "POPIS",
+        "Kód banky protistrany": "KOD_BANKY_PROTIÚČET",
+        "Název účtu protistrany": "PROTIUCET_NAZEV",
+        "Předčíslí účtu protistrany": "PREDCISLI",
+        "Debet": "DEBET",
+        "Účet protistrany": "PROTIUCET_CISLO",
+        "Kredit": "KREDIT",
+        "Datum zaúčtování": "DATUM"
+    },
+    "transaction_types": [
+        {
+            "search_in": [
+                "POPIS",
+                "POPIS 2",
+                "POZNÁMKA",
+                "PROTIUCET_CISLO",
+                "PROTIUCET_NAZEV"
+            ],
+            "conditions": {
+                "contains": [
+                    "daň"
+                ]
+            },
+            "type": "Banka"
+        },
+        {
+            "search_in": [
+                "POPIS",
+                "POPIS 2",
+                "POZNÁMKA",
+                "PROTIUCET_CISLO",
+                "PROTIUCET_NAZEV"
+            ],
+            "conditions": {
+                "contains": [
+                    "úrok"
+                ]
+            },
+            "type": "Banka"
+        },
+        {
+            "search_in": [
+                "CASTKA",
+                "DEBET",
+                "PROTIUCET_CISLO"
+            ],
+            "conditions": {
+                "isnegative": [],
+                "notempty": []
+            },
+            "type": "Odchozí"
+        }
+    ],
+    "ignore_rows_rules": []
+}
